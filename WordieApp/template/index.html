@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wordie</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static '../static/audio.js' %}"></script>
+</head>
+
+<body>
+    <main class="main">
+        <h1 class="h1">Wordie App</h1>
+
+        <form action="">
+            <input name="check" type="search" placeholder="Search word..." class="search" style="width: 100%;">
+        </form>
+
+        {% if word is not None %}
+        <div id="main_word_div">
+            <div class="word_pro">
+                <h3>{{word}}</h3>
+                <p>/{{pronunciation}}/ </p>
+
+            </div>
+
+            <div class="speech_icon">
+                    <audio src="{{audio_link}}" id="audio"></audio>
+                <img src="{% static '../static/playbtn.png' %}" height="40" width="40" alt="" onclick="checkMediaPlaying();">
+            </div>
+
+        </div>
+
+        
+        
+        <div class="word_div">
+
+            <h3>Meaning</h3>
+            
+            {% for meaning in meanings %}
+           
+                <p>-> {{meaning |capfirst}}</p>
+         
+            {% endfor %}
+            <hr>
+        </div>
+
+        
+        {% if examples %}
+       
+        <div class="word_div" style="border-left: 0.2rem solid #582872;">
+
+            <h3>Examples</h3>
+             
+            {% for example in examples %}
+                <p>-> {{example.t | capfirst}}</p>
+ 
+            {% endfor %}
+            
+            <hr>
+        </div>
+        {% endif %}
+        
+        {% if synonyms %}
+            
+        <div class="word_div" style="border-left: 0.2rem solid rgb(233, 63, 63);">
+
+            <h3>Synonyms</h3>
+           
+           {% for synonym in synonyms %}
+                
+              <a href="{{request.path}}?check={{synonym}}"> 
+                   {% if synonym == synonyms|last %}
+                       {{synonym}}
+                    {% else %}
+                    {{synonym}},
+                   {% endif %}
+            </a>
+
+           {% endfor %} 
+            <hr>
+        </div>
+        {% endif %}
+
+        
+        {% if antonyms %}
+      
+        <div class="word_div" style="border-left: 0.2rem solid rgb(26, 117, 8);">
+
+            <h3>Antonymns</h3>
+                
+                {% for antonymn in antonyms %}
+                <a href="{{request.path}}?check={{antonym}}"> 
+                {% if antonymn == antonyms|last %}
+                    {{antonymn}}
+                {% else %}
+                    {{antonymn}},
+                {% endif %}
+                </a>
+                {% endfor %}
+             
+            <hr>
+        </div>
+        {% endif %}
+
+
+        {% else %}
+
+            <center><p>Enter a word in the search box to find its meaning.</p></center> 
+       {% endif %}
+    </main>
+</body>
+
+</html>
