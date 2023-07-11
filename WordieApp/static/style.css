@@ -1,25 +1,41 @@
 body {
-    background: #474aff;
+    background: url("Amazing Desktop Wallpaper.png");
+    background-size: cover;
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 89.3vh;
+}
+.backdrop{
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    padding-top: 5%;
+
 }
 a{text-decoration: none;}
 .main {
     width: 60%;
-    height: 68vh;
+    height: 70%;
     overflow-y: auto;
-    margin: auto;
+    margin: 0 auto 0 auto;
     display: grid;
-    margin-top: 3em;
+    padding-top: 3em;
     background: #fff;
     padding: 2em;
     border-radius: 0.5rem;
     grid-row-gap: 1.2rem;
+    
 }
-
+.main h1.h1 {
+    text-align: center;
+}
+@media screen and (max-width: 1000px) {
+    .main{width: 80%;}
+}
 .search {
     height: 3em;
-    font-size: 1rem;
+    font-size: larger;
     padding-left: 1em;
 }
 
@@ -43,9 +59,11 @@ hr{margin-bottom: 2px;}
     margin-top: 3rem;
 }
 
-@media only screen and (max-width: 700px) {
-    .main {
-        width: 70%;
-        height: 75vh;
-    }
+.messages p{
+    padding: 2em;
+    font-weight: 600;
+    font-size: larger;
+    text-align: center;
+    color: #f8f8f8;
+    border-radius: 0.4em;
 }

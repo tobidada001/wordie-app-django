@@ -3,7 +3,9 @@ from pprint import pprint as pp
 from django.http import HttpResponse
 from . import syn_ant_loop
 import requests as req
+from django.contrib import messages
 # Create your views here.
+
 def index(request):
     word_to_check = None
     college = []
@@ -16,7 +18,11 @@ def index(request):
     
     if 'check' in request.GET:
 
-        word_to_check = request.GET.get('check')
+        word_to_check = request.GET.get('check', None)
+
+        if not word_to_check:
+            messages.error(request, 'You didn\'t enter any word!')
+            return redirect('/')
         
         try:
             college = req.get('https://dictionaryapi.com/api/v3/references/collegiate/json/'+word_to_check+'?key=0f55e041-8e0c-47e8-bcb5-0c7cfd05cb35').json()
@@ -43,6 +49,7 @@ def index(request):
                 'pronunciation': pron,
                 'audio_link': 'https://media.merriam-webster.com/audio/prons/en/us/mp3'+syn_ant_loop.get_audio(audio)+audio+'.mp3'}
         except BaseException :
+            messages.error(request, 'An error has occured. Please try again.')
             return redirect('/')
 
     return render(request, 'index.html', context)
