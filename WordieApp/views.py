@@ -18,6 +18,7 @@ def index(request):
     
     if 'check' in request.GET:
 
+        print('I typed something')
         word_to_check = request.GET.get('check', None)
 
         if not word_to_check:
