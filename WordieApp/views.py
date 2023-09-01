@@ -28,7 +28,7 @@ def index(request):
             college = req.get('https://dictionaryapi.com/api/v3/references/collegiate/json/'+word_to_check+'?key=0f55e041-8e0c-47e8-bcb5-0c7cfd05cb35').json()
             
             thesaurus = req.get('https://dictionaryapi.com/api/v3/references/ithesaurus/json/'+word_to_check+'?key=869bafc3-8999-493d-a211-50975dfaef66').json()
-            
+            print('Yes, yes,')
             for i in range(len(college)):
                 try:
                     audio = college[i]['hwi']['prs'][0]['sound']['audio']
