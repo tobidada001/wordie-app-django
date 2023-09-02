@@ -1,5 +1,6 @@
 body {
-    background: url("Amazing Desktop Wallpaperf.png");
+    /* background: url("Amazing Desktop Wallpaperf.png"); */
+    background-color: #f6f6f6;
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -9,7 +10,6 @@ body {
 .backdrop{
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.6);
     padding-top: 5%;
 
 }
@@ -25,6 +25,9 @@ a{text-decoration: none;}
     padding: 2em;
     border-radius: 0.5rem;
     grid-row-gap: 1.2rem;
+    -webkit-box-shadow: -4px 9px 20px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: -4px 9px 20px -7px rgba(0,0,0,0.75);
+    box-shadow: -4px 9px 20px -7px rgba(0,0,0,0.75);
     
 }
 .main h1.h1 {

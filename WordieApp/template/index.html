@@ -15,7 +15,7 @@
       <main class="main">
         <div class="messages">
           {% for message in messages %}
-          <p style="background-color: red">{{message}}</p>
+          <p style="background-color: rgb(255, 179, 2)">{{message}}</p>
           {% endfor %}
         </div>
         <h1 class="h1">Wordie (Dictionary) App</h1>
@@ -34,9 +34,16 @@
         <div id="main_word_div">
           <div class="word_pro">
             <h3>{{word}}</h3>
-            <p>/{{pronunciation}}/</p>
+            {% if pronunciation %}
+               <p>{{pronunciation}}</p>
+            {% else %}
+              <p>N/A</p>
+            {% endif %}
+           
           </div>
 
+          
+          {% if audio_link %}
           <div class="speech_icon">
             <audio src="{{audio_link}}" id="audio"></audio>
             <img
@@ -47,6 +54,10 @@
               onclick="checkMediaPlaying();"
             />
           </div>
+          {% endif %}
+            
+          
+
         </div>
 
         <div class="word_div">
@@ -66,13 +77,18 @@
           <h3>Examples</h3>
 
           {% for example in examples %}
-          <p>-> {{example.t | capfirst}}</p>
-
+          
+          {% if example is not None %}
+          <p>-> {{example | capfirst}}</p>
+          {% endif %}
+            
           {% endfor %}
 
           <hr />
         </div>
-        {% endif %} {% if synonyms %}
+        {% endif %} 
+        
+        {% if synonyms %}
 
         <div
           class="word_div"
@@ -95,11 +111,19 @@
         <div class="word_div" style="border-left: 0.2rem solid rgb(26, 117, 8)">
           <h3>Antonymns</h3>
 
-          {% for antonymn in antonyms %}
+          {% for antonym in antonyms %}
+
+          
+          {% if antonym %}
+
           <a href="{{request.path}}?check={{antonym}}">
-            {% if antonymn == antonyms|last %} {{antonymn}} {% else %}
-            {{antonymn}}, {% endif %}
+            {% if antonym == antonyms|last %} {{antonym}} {% else %}
+            {{antonym}}, {% endif %}
           </a>
+            
+          {% endif %}
+            
+          
           {% endfor %}
 
           <hr />
